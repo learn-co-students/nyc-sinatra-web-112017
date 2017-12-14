@@ -3,8 +3,21 @@
 <form method="post" action="/figures/<%=@figure.id%>">
   <input type="hidden" name="_method" value="patch">
 
-  <input id="name" type="text" name="figure[name]" placeholder="<%=@figure.name%>">
-  <input id="year_completed" type="text" name="figure[year_completed]" placeholder="<%=@figure.year_completed%>">
-  <!--  figure[name], figure[title_ids], figure[landmark_ids], landmark[name], title[name]-->
-  <input type="submit" value="Edit Figure">
-</form>
+  <input id="figure_name" type="text" name="figure[name]" placeholder="<%=@figure.name%>">
+
+    <ul>
+    <% @titles.each  do |title| %>
+      <li><input id="title_<%=title.id%>" type="checkbox" name="figure[title_ids][]" value="<%=title.id%>"> <label><%=title.name%></label></li>
+    <%end%>
+    </ul>
+
+    <ul>
+    <% @landmarks.each do |landmark| %>
+      <li><input  id="landmark_<%=landmark.id%>" type="checkbox" name="figure[landmark_ids][]" value="<%=landmark.id%>"> <label><%=landmark.name%></label></li>
+    <%end%>
+    </ul>
+
+    <input id="new_landmark" type="text" name="landmark[name]" placeholder="Create New Landmark">
+    <input id="new_title" type="text" name="title[name]" placeholder="Create New Title">
+    <input type="submit" value="Edit Figure">
+  </form>
