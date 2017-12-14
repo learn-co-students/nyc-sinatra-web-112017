@@ -21,7 +21,6 @@ class FiguresController < ApplicationController
       @title =  Title.create(params[:title])
       @figure.titles << @title
     end
-    # binding.pry
     redirect "/figures/#{@figure.id}"
   end
 
