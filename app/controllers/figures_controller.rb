@@ -48,7 +48,7 @@ class FiguresController < ApplicationController
       @title =  Title.update(params[:title])
       @figure.titles << @title
     end
-    
+
     redirect "/figures/#{@figure.id}"
   end
 
