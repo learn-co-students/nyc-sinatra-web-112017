@@ -1,12 +1,12 @@
 class LandmarksController < ApplicationController
 
   get '/landmarks' do
-    erb :index
+    erb :'landmarks/index'
   end
 
   #create a new figure
   get '/landmarks/new' do
-    erb :new
+    erb :'landmarks/new'
   end
 
   post '/landmarks' do
@@ -18,12 +18,12 @@ class LandmarksController < ApplicationController
 
   #view a single id
   get '/landmarks/:id' do
-    erb :show
+    erb :'landmarks/show'
   end
 
   #update
   get '/landmarks/:id/edit' do
-    erb :edit
+    erb :'landmarks/edit'
   end
 
   patch '/landmarks/:id' do
@@ -32,7 +32,7 @@ class LandmarksController < ApplicationController
   end
 
   #delete
-  delete '/landmarks/:id' do end
+  delete '/landmarks/:id' do
 
     redirect to '/landmarks'
   end
