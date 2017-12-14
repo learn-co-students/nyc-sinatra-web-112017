@@ -1,3 +1,21 @@
-<%= #Be able to see all information for
-#figure including checked checkboxes then update in the controller
-=>
+<form action="/figures/<%=@figure.id%>" method="post">
+  <input type="hidden" name="_method" value="PATCH">
+  <p><%= @figure.name %>
+
+  <p>Edit Name?: <input type="text" name="figure[name]" value="<%=@figure.name%>" id="figure_name"></p><br>
+  <p>Add New Title?: <input type="text" name="title[name]" id="new_title"></p><br>
+  <p>Add New Landmark?: <input type="text" name="landmark[name]" id="new_landmark"></p><br>
+  <!-- <p>Existing Landmarks by ID: <input type="text" name="figure[landmark_ids][]" value=""></p> -->
+
+<p>Edit Existing Titles:</p>
+  <%@titles.each do |title|%>
+    <li><input type="checkbox" name="figure[title_ids][]" value="<%=title.id%>" <%='checked' if @figure.titles.include?(title) %> id="title_<%=title.id%>"><%=title.name%></input></li>
+<%end%>
+
+<p>Edit Existing Landmarks:</p>
+  <%@landmarks.each do |landmark|%>
+    <li><input type="checkbox" name="figure[landmark_ids][]" value="<%=landmark.id%>" <%='checked' if @figure.landmarks.include?(landmark) %> id="landmark_<%=landmark.id%>"><%=landmark.name%></input></li>
+<%end%>
+
+  <input type="submit" value="submit" id="Edit Figure">
+</form>
