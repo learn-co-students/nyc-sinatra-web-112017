@@ -12,19 +12,31 @@ class FiguresController < ApplicationController
   #create a new figure
   get '/figures/new' do
     @titles = Title.all
+    @landmarks = Landmark.all
     erb :'figures/new'
   end
 
   post '/figures' do
     #create figures
-
-    @title = Title.find_or_create_by(params[:title])
     @figure = Figure.create(params[:figure])
     @landmark = Landmark.find_or_create_by(params[:landmark])
+
+    #iterate through the existing titles and make association in FigureTitles
+    if params[:figure][:title_ids]
+      params[:figure][:title_ids].each do |title_id|
+        existing_title = Title.find(title_id)
+        @figure.titles << existing_title
+      end
+    end
+    #make a new one if the form has a custom title
+
+    if params[:title]
+      @title = Title.find_or_create_by(params[:title])
+      @figure.titles << @title
+    end
+
     #make association.
     @landmark.figure_id = @figure.id
-
-    binding.pry
 
     # @figure.titles << @title
     # @figure.landmark = @landmark

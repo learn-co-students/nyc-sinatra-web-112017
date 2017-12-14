@@ -6,17 +6,20 @@
   </head>
   <body>
     <form  action="/figures" method="post">
-      Figure Name: <input id="figure_name" type="text" name="figure[name]" value="figure name">
+      <p>Figure Name: <input id="figure_name" type="text" name="figure[name]" value="figure name"></p>
       <!-- Figure TitleIDs: <input id=<%-"title_#{}"%> type="text" name="figure[title_ids][]">
      -->
-     Titles
+     <h4>Titles</h4>
       <% @titles.each do |title| %>
-      Titles:  <input type="checkbox" name="figure[title_ids][]" value='<%= title.id %>' id="title_<%= title.id %>">
-      <%= title.name %>
+      <p><%= title.name %> <input type="checkbox" name="figure[title_ids][]" value='<%= title.id %>' id="title_<%= title.id %>"> </p>
       <% end %>
-      Title Name: <input type="text" name="title[name]" value="">
-      Figure LandmarkIDs: <input type="text" name="figure[landmark_ids][]">
-      Landmark Name: <input type="text" name="landmark[name]">
+      <p> Title Name: <input type="text" name="title[name]" value=""> </p>
+      
+      <% @landmarks.each do |landmark| %>
+      <p><%= landmark.name %> <input type="checkbox" name="figure[landmark_ids][]" value='<%= landmark.id %>' id="landmark_<%= landmark.id %>"> </p>
+      <% end %>
+
+      <p> Landmark Name: <input type="text" name="landmark[name]"></p>
       <input type="submit" value="Submit" id="Submit">
     </form>
   </body>
